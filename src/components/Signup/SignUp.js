@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-const LoginForm = () => {
+const SignUpForm = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
@@ -9,7 +9,12 @@ const LoginForm = () => {
     event.preventDefault();
     const emailValue=emailRef.current.value
     const passwordValue=passwordRef.current.value
-    console.log(emailValue===passwordValue)
+    const confirmPasswordvalue=confirmPasswordRef.current.value
+    if(confirmPasswordvalue!==passwordValue)
+    {
+      alert("confirm password and password doest match")
+return
+    }
     const myobj = {
       email: emailRef.current.value,
       password: passwordRef.current.value,
@@ -67,4 +72,4 @@ const LoginForm = () => {
     </div>
   );
 };
-export default LoginForm;
+export default SignUpForm;
