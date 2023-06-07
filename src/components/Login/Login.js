@@ -12,7 +12,7 @@ const Login = () => {
     };
     console.log(myobj);
     fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDTjkTahc6Ekoy2QubulsZKyfhpCkZ4Q4Y",
+      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCKcB2kOdfnhOnnC789pc1BZXjZzebQnu0",
       {
         method: "POST",
         body: JSON.stringify({
@@ -31,7 +31,7 @@ const Login = () => {
         }
       })
       .then((res) => {
-        localStorage.setItem("e-user", JSON.stringify(res.idToken));
+        localStorage.setItem("token", (res.idToken));
         setRedirect(true);
       })
       .catch((err) => {
@@ -54,7 +54,7 @@ const Login = () => {
               type="email"
               style={{
                 backgroundColor: "black",
-                borderRadius: "40%",
+             
                 height: "25px",
                 color: "white",
                 margin: "10px",
@@ -69,7 +69,7 @@ const Login = () => {
               type="password"
               style={{
                 backgroundColor: "black",
-                borderRadius: "40%",
+                
                 height: "25px",
                 color: "white",
                 margin: "10px",

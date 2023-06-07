@@ -12,8 +12,8 @@ const SignUpForm = () => {
     const confirmPasswordvalue=confirmPasswordRef.current.value
     if(confirmPasswordvalue!==passwordValue)
     {
-      alert("confirm password and password doest match")
-return
+      alert("confirm password and password doesn't match")
+return;
     }
     const myobj = {
       email: emailRef.current.value,
@@ -21,7 +21,7 @@ return
       confirmPassword: confirmPasswordRef.current.value,
     };
     fetch(
-      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDTjkTahc6Ekoy2QubulsZKyfhpCkZ4Q4Y",
+      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCKcB2kOdfnhOnnC789pc1BZXjZzebQnu0",
       {
         method: "POST",
         body: JSON.stringify({

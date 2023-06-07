@@ -8,6 +8,7 @@ import Login from "./components/Login/Login";
 // import { Route } from "react-router-dom/cjs/react-router-dom.min";
 import { Switch, Route } from "react-router-dom";
 import Welcome from "./components/welcome/Welcome";
+import Profile from "./components/profile/Profile";
 function App() {
   return (
     <Switch>
@@ -17,6 +18,9 @@ function App() {
       </Route>{" "}
       <Route path="/welcome">
         <Welcome></Welcome>
+      </Route>
+      <Route path="/profile">
+        <Profile></Profile>
       </Route>
       <Route path="/">
         <SignUpFormPrint></SignUpFormPrint>
