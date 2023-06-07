@@ -9,8 +9,9 @@ const ExpenseForm=()=>{
     const formDataHandler=(event)=>{
         event.preventDefault();
           const myobj={
+            id:Math.random(),
         name:nameRef.current.value,
-        amount:AmountRef.current.value,
+        amount:+(AmountRef.current.value),
         category:categoryRef.current.value
     }
     expenseCtx.addExpense(myobj)
