@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 const Login = () => {
   const [redirect, setRedirect] = useState(false);
   const emailRef = useRef();
@@ -31,7 +31,7 @@ const Login = () => {
         }
       })
       .then((res) => {
-        localStorage.setItem("token", (res.idToken));
+        localStorage.setItem("token", res.idToken);
         setRedirect(true);
       })
       .catch((err) => {
@@ -54,7 +54,7 @@ const Login = () => {
               type="email"
               style={{
                 backgroundColor: "black",
-             
+
                 height: "25px",
                 color: "white",
                 margin: "10px",
@@ -69,7 +69,7 @@ const Login = () => {
               type="password"
               style={{
                 backgroundColor: "black",
-                
+
                 height: "25px",
                 color: "white",
                 margin: "10px",
@@ -79,6 +79,7 @@ const Login = () => {
               ref={passwordRef}
             ></input>
             <div style={{ display: "block" }}>
+              <Link to="/forgotPassword">Forgot Password?</Link>
               <button
                 style={{
                   backgroundColor: "black",
@@ -92,6 +93,8 @@ const Login = () => {
               >
                 Login
               </button>
+              <h3><Link to="/">sign up</Link></h3>
+              
             </div>
           </div>
         </form>

@@ -9,6 +9,7 @@ import Login from "./components/Login/Login";
 import { Switch, Route } from "react-router-dom";
 import Welcome from "./components/welcome/Welcome";
 import Profile from "./components/profile/Profile";
+import ForgotPassword from "./components/forgetPassword/ForgotPassword";
 function App() {
   return (
     <Switch>
@@ -21,6 +22,9 @@ function App() {
       </Route>
       <Route path="/profile">
         <Profile></Profile>
+      </Route>
+      <Route path="/forgotPassword">
+        <ForgotPassword></ForgotPassword>
       </Route>
       <Route path="/">
         <SignUpFormPrint></SignUpFormPrint>
