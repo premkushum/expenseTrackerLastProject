@@ -2,6 +2,9 @@ import { createContext } from "react";
 
 const ExpenseContext=createContext({
     addExpense:()=>{},
-    expenseItem: []
+    expenseItem: [],
+    deleteExpense:()=>{},
+    editExpense:()=>{}
+
 })
 export default ExpenseContext

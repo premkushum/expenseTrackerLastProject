@@ -5,6 +5,7 @@ import "./App.css";
 
 import SignUpFormPrint from "./components/Signup/SignUpFormPrint";
 import Login from "./components/Login/Login";
+import EditForm from "./components/expense/editExpense/editForm";
 // import { Route } from "react-router-dom/cjs/react-router-dom.min";
 import { Switch, Route } from "react-router-dom";
 import Welcome from "./components/welcome/Welcome";
@@ -13,6 +14,9 @@ import ForgotPassword from "./components/forgetPassword/ForgotPassword";
 function App() {
   return (
     <Switch>
+      <Route path="/edit">
+            <EditForm></EditForm>
+        </Route>
       <Route path="/auth">
         {" "}
         <Login></Login>
