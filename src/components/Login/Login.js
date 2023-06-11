@@ -1,16 +1,29 @@
-import { useRef, useState } from "react";
+import { useRef} from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Redirect, Link } from "react-router-dom";
+import { authAction } from "../../store/reducerStore";
+import { useEffect } from "react";
 const Login = () => {
-  const [redirect, setRedirect] = useState(false);
+  useEffect(()=>{
+    if(localStorage.getItem("token")) 
+    {
+      dispatch(authAction.login())
+    }
+   },[])
+  const dispatch = useDispatch();
+  const redirect = useSelector((state) => state.auth.isAuthenticated);
+  console.log(redirect)
   const emailRef = useRef();
   const passwordRef = useRef();
   const inputDataHAndler = (event) => {
     event.preventDefault();
+
     const myobj = {
       email: emailRef.current.value,
       password: passwordRef.current.value,
     };
-    console.log(myobj);
+   
+
     fetch(
       "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCKcB2kOdfnhOnnC789pc1BZXjZzebQnu0",
       {
@@ -32,10 +45,13 @@ const Login = () => {
       })
       .then((res) => {
         localStorage.setItem("token", res.idToken);
-        setRedirect(true);
+         dispatch(authAction.login());
+        
+    
       })
       .catch((err) => {
         alert("wrong details ....authentication failed");
+      
       });
   };
   if (redirect) {
@@ -93,8 +109,9 @@ const Login = () => {
               >
                 Login
               </button>
-              <h3><Link to="/">sign up</Link></h3>
-              
+              <h3>
+                <Link to="/">sign up</Link>
+              </h3>
             </div>
           </div>
         </form>

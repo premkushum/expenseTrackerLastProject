@@ -1,13 +1,18 @@
-import { useState } from "react";
+
+import { useDispatch, useSelector } from "react-redux";
 import {Redirect} from "react-router-dom"
+import { authAction } from "../../store/reducerStore";
 
 const LogOutButton = () => {
-  const [logOut, setLogOut] = useState(false);
+  const logIn=useSelector((state)=>state.auth.isAuthenticated)
+  const dispatch=useDispatch()
+  
   const logOutHandler = () => {
     localStorage.removeItem("token");
-    setLogOut(true);
+    dispatch(authAction.logout())
+    
   };
-  if (logOut) {
+  if (!logIn) {
     return <Redirect to="/auth"></Redirect>;
   }
   return <button onClick={logOutHandler}>LogOut</button>;

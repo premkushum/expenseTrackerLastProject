@@ -5,15 +5,19 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom/cjs/react-router-dom.min";
 import ExpenseContextProvider from "./store/ExpenseContextProvider";
+import { Provider } from "react-redux";
+import authStore from "./store/reducerStore";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <ExpenseContextProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </ExpenseContextProvider>
+    <Provider store={authStore}>
+      <ExpenseContextProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ExpenseContextProvider>
+    </Provider>
   </React.StrictMode>
 );
 

@@ -15,7 +15,7 @@ const EditForm = (props) => {
       token: propsItem.token,
       name: nameRef.current.value,
       category: categoryRef.current.value,
-      amount: AmountRef.current.value,
+      amount: +(AmountRef.current.value),
     };
     fetch(
       `https://expensetrackerdemo-4954a-default-rtdb.firebaseio.com/testing/${propsItem.token}.json`,
