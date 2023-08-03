@@ -4,6 +4,7 @@ import { Route, Redirect } from "react-router-dom";
 import editForm from "./editForm";
 import { useState } from "react";
 import EditForm from "./editForm";
+import { FaEdit } from 'react-icons/fa';
 const EditButton = (props) => {
   const expenseCtx = useContext(ExpenseContext);
   const [editForm, setEditForm] = useState(false);
@@ -18,9 +19,9 @@ const EditButton = (props) => {
       return <EditForm onSubmitClick={editFormCloser} items={props.items}></EditForm>;
     }
   return (
-    <div>
-      <button onClick={editItemHandler}>EDIT</button>
-    </div>
+    
+      <button onClick={editItemHandler} style={{height:"40px"}}><FaEdit></FaEdit>Edit</button>
+ 
   );
 };
 export default EditButton;

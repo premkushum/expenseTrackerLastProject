@@ -28,6 +28,7 @@ const ExpenseContextProvider = (props) => {
               amount: item.amount,
               category: item.category,
               token: item.token,
+              date: item.date,
             };
           });
           setExpense(newItems);
@@ -39,6 +40,9 @@ const ExpenseContextProvider = (props) => {
         console.log(err);
       });
   }, []);
+
+  console.log(expense)
+
   const expenseHandler = (expenseData) => {
     fetch(
       "https://expensetrackerdemo-4954a-default-rtdb.firebaseio.com/testing.json",
@@ -95,14 +99,16 @@ const ExpenseContextProvider = (props) => {
         if (response.ok) {
           return response.json();
         } else {
-          throw new Error("expense data did not deleted......try again and dont forget to check internet connection");
+          throw new Error(
+            "expense data did not deleted......try again and dont forget to check internet connection"
+          );
         }
       })
       .then((res) => {
         setExpense(newExpenseData);
       })
       .catch((err) => {
-        alert(err)
+        alert(err);
       });
   };
   const editExpenseHandler = (editedExpenseData) => {
@@ -118,6 +124,8 @@ const ExpenseContextProvider = (props) => {
     updatedItems[existingIndex] = updatedItem;
     setExpense(updatedItems);
   };
+
+
   const ExpenseContextHelper = {
     addExpense: expenseHandler,
     expenseItem: expense,

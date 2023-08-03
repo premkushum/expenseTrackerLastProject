@@ -1,4 +1,7 @@
 import { useRef } from "react";
+import navcss from "./signup.module.css"
+import { NavLink } from "react-router-dom/cjs/react-router-dom";
+import SignUpFormPrint from "./SignUpFormPrint";
 
 const SignUpForm = () => {
   const emailRef = useRef();
@@ -52,23 +55,42 @@ return;
   };
 
   return (
-    <div>
-      {" "}
-      <form onSubmit={formSubmitHandler}>
-        <div style={{ display: "block", marginBottom: "10px" }}>
-          <label>Email</label>
-          <input ref={emailRef}></input>
-        </div>
-        <div style={{ display: "block", marginBottom: "10px" }}>
-          <label>Password</label>
-          <input ref={passwordRef}></input>/
-        </div>
-        <div style={{ display: "block", marginBottom: "20px" }}>
-          <label>Confirm Password</label>
-          <input ref={confirmPasswordRef}></input>{" "}
-        </div>
-        <button style={{ borderRadius: "15%" }}>SIGN UP</button>
+    
+    // <div>
+    //   {" "}
+    //   <form onSubmit={formSubmitHandler}>
+    //     <div style={{ display: "block", marginBottom: "10px" }}>
+    //       <label>Email</label>
+    //       <input ref={emailRef}></input>
+    //     </div>
+    //     <div style={{ display: "block", marginBottom: "10px" }}>
+    //       <label>Password</label>
+    //       <input ref={passwordRef}></input>/
+    //     </div>
+    //     <div style={{ display: "block", marginBottom: "20px" }}>
+    //       <label>Confirm Password</label>
+    //       <input ref={confirmPasswordRef}></input>{" "}
+    //     </div>
+    //     <button style={{ borderRadius: "15%" }}>SIGN UP</button>
+    //   </form>
+    // </div>
+
+    <div className={navcss.signuppage}>
+    <div className={navcss.contentbox}>
+      <p>Signup</p>
+      <form className={navcss.form}>
+        <input placeholder="Email" ref={emailRef} ></input>
+        <input placeholder="password" ref={passwordRef} ></input>
+        <input placeholder="confirm password"  ref={confirmPasswordRef}></input>
       </form>
+      <button className={navcss.button} onClick={formSubmitHandler}>Signup</button>
+      <div>
+        <NavLink to="/notworking">Forgot Password</NavLink>
+      </div>
+    </div>
+    <div className={navcss.signupbtn}>
+      <SignUpFormPrint>Already have an Account ! Login</SignUpFormPrint>
+    </div>
     </div>
   );
 };

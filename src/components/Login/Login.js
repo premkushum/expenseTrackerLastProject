@@ -1,18 +1,19 @@
-import { useRef} from "react";
+import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, Link } from "react-router-dom";
 import { authAction } from "../../store/reducerStore";
 import { useEffect } from "react";
+import navcss from "./login.module.css";
+import { NavLink } from "react-router-dom/cjs/react-router-dom";
 const Login = () => {
-  useEffect(()=>{
-    if(localStorage.getItem("token")) 
-    {
-      dispatch(authAction.login())
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      dispatch(authAction.login());
     }
-   },[])
+  }, []);
   const dispatch = useDispatch();
   const redirect = useSelector((state) => state.auth.isAuthenticated);
-  console.log(redirect)
+  console.log(redirect);
   const emailRef = useRef();
   const passwordRef = useRef();
   const inputDataHAndler = (event) => {
@@ -22,7 +23,6 @@ const Login = () => {
       email: emailRef.current.value,
       password: passwordRef.current.value,
     };
-   
 
     fetch(
       "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCKcB2kOdfnhOnnC789pc1BZXjZzebQnu0",
@@ -45,77 +45,55 @@ const Login = () => {
       })
       .then((res) => {
         localStorage.setItem("token", res.idToken);
-         dispatch(authAction.login());
-        
-    
+        dispatch(authAction.login());
       })
       .catch((err) => {
         alert("wrong details ....authentication failed");
-      
       });
   };
   if (redirect) {
     return <Redirect to="/welcome"></Redirect>;
   }
   return (
-    <div>
-      <h2>LOGIN PAGE</h2>
-      <div
-        style={{ margin: "30%", borderBlockStyle: "groove", height: "200px" }}
-      >
-        {" "}
+    <div className={navcss.loginpage}>
+      <div className={navcss.contentbox}>
+        <p>Login</p>
+        <form className={navcss.form} >
+          <input placeholder="Email" ref={emailRef}></input>
+          <input placeholder="password"  ref={passwordRef}></input>
+        </form>
+        <button className={navcss.button} onClick={inputDataHAndler}>LOGIN</button>
+        <div>
+          <NavLink to="/forgotPassword">Forgot Password</NavLink>
+        </div>
+      </div>
+      <div className={navcss.signupbtn}>
+        <button>
+          <Link to="/">Don`t have an account ! signup</Link>
+        </button>
+      </div>
+
+      {/* <div>
         <form onSubmit={inputDataHAndler}>
           <div style={{ display: "block" }}>
-            <input
-              type="email"
-              style={{
-                backgroundColor: "black",
-
-                height: "25px",
-                color: "white",
-                margin: "10px",
-              }}
-              placeholder={"email"}
-              ref={emailRef}
-            ></input>
+            <input type="email" placeholder={"email"} ref={emailRef}></input>
           </div>
           <div style={{ display: "block" }}>
-            {" "}
             <input
               type="password"
-              style={{
-                backgroundColor: "black",
-
-                height: "25px",
-                color: "white",
-                margin: "10px",
-                color: "white",
-              }}
               placeholder="PassWord"
               ref={passwordRef}
             ></input>
             <div style={{ display: "block" }}>
               <Link to="/forgotPassword">Forgot Password?</Link>
-              <button
-                style={{
-                  backgroundColor: "black",
-                  borderRadius: "40%",
-                  height: "25px",
-                  width: "200px",
-                  color: "white",
-                  margin: "10px ",
-                  color: "white",
-                }}
-              >
-                Login
-              </button>
+              <button>Login</button>
               <h3>
                 <Link to="/">sign up</Link>
               </h3>
             </div>
           </div>
         </form>
-      </div>
+      </div> */}
     </div>
   );
 };

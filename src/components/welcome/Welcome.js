@@ -4,11 +4,13 @@ import ExpenseForm from "../expense/ExpenseForm";
 import ExpensePrint from "../expense/ExpensePrint";
 import { themeActions } from "../../store/reducerStore";
 import { useDispatch, useSelector } from "react-redux";
+import navcss from "./welcome.module.css";
+import { useState } from "react";
 
 const Welcome = () => {
-const themeLight=useSelector(state=>state.theme.isLight)
-console.log(themeLight)
-const dispatch=useDispatch()
+  const themeLight = useSelector((state) => state.theme.isLight);
+  const [theme, settheme] = useState(true);
+  const dispatch = useDispatch();
 
   const verifyEmailHandler = () => {
     fetch(
@@ -37,33 +39,38 @@ const dispatch=useDispatch()
       });
   };
 
-  const darkThemeHandler=()=>{
-    dispatch(themeActions.dark())
-  }
-  const lightThemeHandler=()=>{
-    dispatch(themeActions.light())
-  }
+  const ThemeHandler = () => {
+    dispatch(themeActions.dark());
+    settheme(!theme);
+  };
+  // const lightThemeHandler = () => {
+  //   dispatch(themeActions.light());
+  // };
   return (
-    <div style={{
-      backgroundColor: !themeLight ? "black" : "white",
-      color: "brown" }}>
-      <div style={{ display: "inline-flex", marginRight: "40%" }}>
+    <div className={navcss.container}>
+      <div className={navcss.welcomepage}>
         <h2>welcome to Expense tracker</h2>
+        <div className={navcss.profilemsg}>
+          <h2>
+            your profile is incomplete <Link to="/profile">complete now</Link>
+          </h2>
+        </div>
       </div>
-      <div style={{ textAlign: "right", display: "inline-flex" }}>
-        <h2>
-          your profile is incomplete <Link to="/profile">complete now</Link>
-        </h2>
+      <div className={navcss.formcontrol}>
+        <ExpenseForm></ExpenseForm>
+        <div className={navcss.navigation}>
+          <button onClick={verifyEmailHandler}>verify email</button>
+
+          <button onClick={ThemeHandler}>
+            {theme ? "Light Theme" : "Dark Theme"}
+          </button>
+          <LogOutButton></LogOutButton>
+        </div>
       </div>
       <hr></hr>
-      <button onClick={verifyEmailHandler}>verify email</button>
-      <div style={{justifyContent:"right"}}>
-        <button onClick={darkThemeHandler}>Dark theme</button>
-        <button onClick={lightThemeHandler}>Light theme</button>
-      </div>
-      <LogOutButton></LogOutButton>
 
-      <ExpenseForm></ExpenseForm>
+      
+
       <ExpensePrint></ExpensePrint>
     </div>
   );
