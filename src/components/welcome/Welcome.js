@@ -46,21 +46,14 @@ const Welcome = () => {
   return (
     <div className={themelight ? navcss.container : navcss.containerblack}>
       <div className={navcss.welcome}>
-        <div className={navcss.welcomemsg}>
-          <h2>welcome to Expense Tracker</h2>
+        <div className={navcss.title}>
+          <h2>Expense Tracker</h2>
         </div>
-
         <div className={navcss.profilemsg}>
-          <p>
-            your profile is incomplete{" "}
-            <Link to="/profile" className={navcss.link}>
-              {" "}
-              complete now
-            </Link>
-          </p>
+          <p>your profile is incomplete <Link to="/profile">complete now</Link></p>
         </div>
       </div>
-      <hr></hr>
+      <div className={navcss.border}></div>
       <div className={navcss.formcontrol}>
         <ExpenseForm></ExpenseForm>
         <div className={navcss.navigation}>
@@ -72,7 +65,7 @@ const Welcome = () => {
           <LogOutButton></LogOutButton>
         </div>
       </div>
-      <hr></hr>
+      {/* <div className={navcss.border}></div> */}
 
       <ExpensePrint></ExpensePrint>
     </div>

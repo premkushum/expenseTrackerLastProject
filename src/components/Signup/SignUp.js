@@ -2,6 +2,7 @@ import { useRef } from "react";
 import navcss from "./signup.module.css"
 import { NavLink } from "react-router-dom/cjs/react-router-dom";
 import SignUpFormPrint from "./SignUpFormPrint";
+import { toast } from "react-toastify"
 
 const SignUpForm = () => {
   const emailRef = useRef();
@@ -41,16 +42,16 @@ return;
         if (response.ok) {
           return response.json();
         } else {
-          throw new Error("authentication failed email password is wrong");
+          throw new Error("authentication failed check ur wmail and password structure");
         }
       })
       .then((res) => {
-        console.log(res);
-        console.log("sucesssssfl")
+        toast("Account Successfully created....now ypu can Login with these details")
       })
       .catch((err) => {
-        console.log(err);
-        alert(err)
+        toast.error(err.message,{
+          autoClose:3000
+        })
       });
   };
 
@@ -84,9 +85,7 @@ return;
         <input placeholder="confirm password"  ref={confirmPasswordRef}></input>
       </form>
       <button className={navcss.button} onClick={formSubmitHandler}>Signup</button>
-      <div>
-        <NavLink to="/notworking">Forgot Password</NavLink>
-      </div>
+      
     </div>
     <div className={navcss.signupbtn}>
       <SignUpFormPrint>Already have an Account ! Login</SignUpFormPrint>

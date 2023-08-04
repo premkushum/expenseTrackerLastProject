@@ -4,11 +4,13 @@ import ExpenseDeleteButton from "./ExpenseDeleteButton";
 import EditButton from "./editExpense/editButton";
 import navcss from "./expenseprint.module.css";
 import Expensegraph from "./Expensegraph";
+import ActivateExpense from "./ActivateExpense";
 
 const ExpensePrint = () => {
   const expenseCtx = useContext(ExpenseContext);
   const [filterarray, setFilterArray] = useState(expenseCtx.expenseItem);
   const [times, settime] = useState("All time");
+  const [premium,setPremium]=useState(false);
 
   useEffect(() => {
     // Update filterarray whenever expenseCtx.expenseItem changes
@@ -44,6 +46,7 @@ const ExpensePrint = () => {
       <div key={item.id}>
         <div className={navcss.category}>
           <div className={navcss.item}>
+            <span className={navcss.date}>{item.date}</span>
             <h3 className={navcss.itemname}>{item.name}</h3>
             <h3 className={navcss.amount}>{item.amount}</h3>
             <h3 className={navcss.categoryname}>{item.category}</h3>
@@ -68,12 +71,7 @@ const ExpensePrint = () => {
   };
 
   const premiumhandler = () => {
-    let premium;
-    if (premium > 10000) {
-      <p>premium activated</p>;
-    } else {
-      <p>not activated</p>
-    }
+    setPremium(!premium);
   };
 
   return (
@@ -88,6 +86,7 @@ const ExpensePrint = () => {
           <button onClick={sorteditemhandler}>Sort data</button>
         </div>
       </div>
+      <div className={navcss.border}></div>
       <div className={navcss.wrapper}>
         <div className={navcss.container}>
           {newArray.length > 0 ? (
@@ -100,7 +99,8 @@ const ExpensePrint = () => {
           )}
         </div>
         <div className={navcss.graphcategory}>
-          <h2>graph representer</h2>
+          <h2>Graph Representer</h2>
+       
           <div>
             <h4>showing you graph data for : {times}</h4>
           </div>
@@ -110,6 +110,7 @@ const ExpensePrint = () => {
           </div>
         </div>
       </div>
+     {premium?<ActivateExpense close={premiumhandler} ></ActivateExpense>:""} 
     </Fragment>
   );
 };

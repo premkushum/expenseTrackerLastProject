@@ -7,7 +7,9 @@ import { BrowserRouter } from "react-router-dom/cjs/react-router-dom.min";
 import ExpenseContextProvider from "./store/ExpenseContextProvider";
 import { Provider } from "react-redux";
 import authStore from "./store/reducerStore";
-
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import "./index.css"
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
@@ -15,6 +17,7 @@ root.render(
       <ExpenseContextProvider>
         <BrowserRouter>
           <App />
+          <ToastContainer></ToastContainer>
         </BrowserRouter>
       </ExpenseContextProvider>
     </Provider>

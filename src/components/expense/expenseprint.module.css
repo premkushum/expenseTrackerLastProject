@@ -13,6 +13,7 @@
    box-shadow: 5px 8px 11px black;
    margin-top:5px;
    overflow-y: auto;
+   font-family: Arial, Helvetica, sans-serif;
 }
 .category {
   display: flex;
@@ -27,7 +28,7 @@
  
 }
 .itemname {
-  width: 245px;
+  width: 200px;
   /* background-color: deeppink; */
   margin-left: 5px;
   text-overflow: ellipsis;
@@ -35,7 +36,7 @@
   white-space: nowrap;
 }
 .amount {
-  width: 120px;
+  width: 100px;
   /* background-color: chocolate; */
   margin-left: 5px;
   text-overflow: ellipsis;
@@ -43,11 +44,21 @@
   white-space: nowrap;
 }
 .categoryname {
-  width: 130px;
+  width: 120px;
   margin-left: 5px;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+}
+.date{
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  width:100px;
+  left:20px;
+  background-color: dodgerblue;
+  color:whitesmoke;
+  font-family: arial
 }
 .categorybtn {
   display: flex;
@@ -61,7 +72,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 5px 8px 11px black;
+  box-shadow: 15px 8px 11px 2px black;
   flex-direction: column;
   margin-top: 5px;
   margin-left: 5px;
@@ -82,9 +93,12 @@ justify-content: space-between;
   color:white;
   font-weight: 700;
 }
-.date{
-  position: absolute;
-  width:20px
+
+
+.border{
+  width:100%;
+  
+  border: 1px solid dimgray;
 }
 
 @media (max-width: 900px) {

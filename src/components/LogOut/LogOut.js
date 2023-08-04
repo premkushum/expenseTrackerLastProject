@@ -2,6 +2,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import {Redirect} from "react-router-dom"
 import { authAction } from "../../store/reducerStore";
+import { toast } from "react-toastify"
 
 const LogOutButton = () => {
   const logIn=useSelector((state)=>state.auth.isAuthenticated)
@@ -9,7 +10,8 @@ const LogOutButton = () => {
   
   const logOutHandler = () => {
     localStorage.removeItem("token");
-    dispatch(authAction.logout())
+    dispatch(authAction.logout());
+    toast("Logout Successfully")
     
   };
   if (!logIn) {

@@ -12,38 +12,25 @@
 }
 .welcome{
   display: flex;
+  justify-content:space-between;
+  background-color: crimson;
+}
+.title{
+  color: antiquewhite;
+  
+}
+.profilemsg>p{
+background-color: antiquewhite;
+border-radius: 15px;
+padding: 5px;
+color: brown;
+}
 
-  justify-content: space-between;
-  color: rgb(215, 59, 59);
-}
-.profilemsg {
-  /* display: flex; */
-  margin-right: 20px;
-  justify-content: center;
-  /* align-items: center; */
-}
-.welcomemsg > h2 {
-  background-color: white;
-  border-radius: 10px;
-  margin: 5px;
-  display: flex;
-  align-items: center;
-  padding: 2px;
-}
-.profilemsg > p {
-  background-color: white;
-  border-radius: 25px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 3px;
-  padding:3px
-}
 .formcontrol {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 10px;
 }
 .navigation {
   display: flex;
@@ -60,6 +47,11 @@
   margin-left: 5px;
   /* text-decoration: none; */
   font-size: large;
+}
+.border{
+  width:100%;
+  
+  border: 1px solid dimgray;
 }
 @media (max-width: 900px) {
   .welcome{

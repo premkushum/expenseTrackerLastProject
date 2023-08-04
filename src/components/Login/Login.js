@@ -5,6 +5,8 @@ import { authAction } from "../../store/reducerStore";
 import { useEffect } from "react";
 import navcss from "./login.module.css";
 import { NavLink } from "react-router-dom/cjs/react-router-dom";
+import { toast } from "react-toastify";
+
 const Login = () => {
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -42,13 +44,21 @@ const Login = () => {
         if (response.ok) {
           return response.json();
         }
+        else{
+          throw new Error("authentication failed")
+        }
       })
       .then((res) => {
         localStorage.setItem("token", res.idToken);
         dispatch(authAction.login());
+        toast.success("login successful",{
+          autoClose:2000
+        })
       })
       .catch((err) => {
-        alert("wrong details ....authentication failed");
+        toast.error(err.message,{
+          autoClose:2000
+        })
       });
   };
   if (redirect) {

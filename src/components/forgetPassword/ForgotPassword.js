@@ -1,5 +1,8 @@
 import { useRef } from "react";
 import { Link } from "react-router-dom";
+import navcss from "./forgotpassword.module.css"
+import { Redirect } from "react-router-dom";
+import { toast } from "react-toastify";
 const ForgotPassword = () => {
   const emailRef = useRef();
 
@@ -24,23 +27,18 @@ const ForgotPassword = () => {
       })
       .then((res) => {
         console.log(res);
+        toast.success("An email with recovering details for password sent to registered email");
+        <Redirect to="/auth"></Redirect>
+
       })
       .catch((err) => {
         // Handle specific error type
-        console.log("A TypeError occurred:", err.message);
+        toast.error(err.message);
       });
   };
   return (
-    <div style={{ backgroundColor: "yellow" }}>
-      <div
-        style={{
-          backgroundColor: "black",
-          marginTop: "300px",
-          paddingLeft: "300px",
-          color: "white",
-          height: "300px",
-        }}
-      >
+    <div className={navcss.container}>
+      <div className={navcss.main}>
         <h4>Enter the registered email</h4>
         <input placeholder="Email" ref={emailRef}></input>
         <button
@@ -52,7 +50,7 @@ const ForgotPassword = () => {
         <p>
           Already a user?
           <Link to="/auth">
-            <b style={{ color: "yellow" }}>LOGIN</b>
+            <b>LOGIN</b>
           </Link>
         </p>
       </div>

@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import ExpenseContext from "./ExpenseContext";
+import { toast } from "react-toastify";
+
 const ExpenseContextProvider = (props) => {
   const [expense, setExpense] = useState([]);
   useEffect(() => {
@@ -37,11 +39,11 @@ const ExpenseContextProvider = (props) => {
         }
       })
       .catch((err) => {
-        console.log(err);
+        toast.error(err.message);
       });
   }, []);
 
-  console.log(expense)
+  console.log(expense);
 
   const expenseHandler = (expenseData) => {
     fetch(
@@ -73,19 +75,22 @@ const ExpenseContextProvider = (props) => {
               if (response.ok) {
                 return response.json();
               } else {
-                throw new Error("data didnt saved in server");
+                throw new Error("Expense didn`t saved in server");
               }
             })
-            .then((res) => {})
-            .catch((err) => {
-              console.log(err);
+            .then((res) => {
+              toast("Expense added in Expense list Successfully", {
+                autoClose: 2000,
+              });
             });
 
           return [...prevstate, { ...expenseData, token: res.name }];
         });
       })
       .catch((err) => {
-        console.log(err);
+       toast.error(err.message,{
+        autoClose:2000
+       })
       });
   };
   const deleteExpenseHandler = (newExpenseData, token) => {
@@ -100,15 +105,20 @@ const ExpenseContextProvider = (props) => {
           return response.json();
         } else {
           throw new Error(
-            "expense data did not deleted......try again and dont forget to check internet connection"
+            "expense data did not deleted......try again"
           );
         }
       })
       .then((res) => {
         setExpense(newExpenseData);
+        toast.success("expense Deleted successfully",{
+          autoClose:2000
+        })
       })
       .catch((err) => {
-        alert(err);
+        toast.error(err.message,{
+          autoClose:2000
+        })
       });
   };
   const editExpenseHandler = (editedExpenseData) => {
@@ -123,8 +133,10 @@ const ExpenseContextProvider = (props) => {
 
     updatedItems[existingIndex] = updatedItem;
     setExpense(updatedItems);
+    toast("expense successfully edited",{
+      autoClose:2000
+    })
   };
-
 
   const ExpenseContextHelper = {
     addExpense: expenseHandler,
