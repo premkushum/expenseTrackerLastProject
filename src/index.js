@@ -10,6 +10,7 @@ import authStore from "./store/reducerStore";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import "./index.css"
+import "./font.css"
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
