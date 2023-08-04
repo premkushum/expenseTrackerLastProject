@@ -1,5 +1,6 @@
 .wrapper{
     display: flex;
+    /* margin-right:5px; */
 }
 
 .container {
@@ -10,7 +11,7 @@
   width: 100%;
    background-color: aliceblue;
    box-shadow: 5px 8px 11px black;
-   margin:5px;
+   margin-top:5px;
    overflow-y: auto;
 }
 .category {
@@ -26,7 +27,7 @@
  
 }
 .itemname {
-  width: 250px;
+  width: 245px;
   /* background-color: deeppink; */
   margin-left: 5px;
   text-overflow: ellipsis;
@@ -62,9 +63,28 @@
   justify-content: center;
   box-shadow: 5px 8px 11px black;
   flex-direction: column;
+  margin-top: 5px;
+  margin-left: 5px;
 }
 .buttons{
-  
+display:flex;
+justify-content: space-between;
+}
+.btncategory1{
+  display:flex;
+  justify-content: center;
+}
+.btncategory1>button,.btncategory2>button{
+  width:100px;
+  height:40px;
+  margin: 5px;
+  background-color: chocolate;
+  color:white;
+  font-weight: 700;
+}
+.date{
+  position: absolute;
+  width:20px
 }
 
 @media (max-width: 900px) {
@@ -73,7 +93,8 @@
   }
   .graphcategory{
     width:100%;
-    height:100%
+    height: 100%;
+    margin-left:0
   }
   .container{
     height: 35vh;

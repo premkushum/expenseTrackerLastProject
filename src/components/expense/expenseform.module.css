@@ -22,9 +22,10 @@
 .container > button {
   /* width: 100px; */
   height: 30px;
-  background-color: black;
+  background-color:goldenrod;
   color: white;
   border-radius: 15px;
+  font-weight: 700;
 }
 @media (max-width: 525px) {
   .container {

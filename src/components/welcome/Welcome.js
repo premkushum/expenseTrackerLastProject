@@ -8,8 +8,8 @@ import navcss from "./welcome.module.css";
 import { useState } from "react";
 
 const Welcome = () => {
-  const themeLight = useSelector((state) => state.theme.isLight);
-  const [theme, settheme] = useState(true);
+  // const themeLight = useSelector((state) => state.theme.isLight);
+  const [themelight, settheme] = useState(true);
   const dispatch = useDispatch();
 
   const verifyEmailHandler = () => {
@@ -40,29 +40,30 @@ const Welcome = () => {
   };
 
   const ThemeHandler = () => {
-    dispatch(themeActions.dark());
-    settheme(!theme);
+    
+    settheme(!themelight);
   };
   // const lightThemeHandler = () => {
   //   dispatch(themeActions.light());
   // };
   return (
-    <div className={navcss.container}>
+    <div className={themelight?navcss.container:navcss.containerblack}>
       <div className={navcss.welcomepage}>
-        <h2>welcome to Expense tracker</h2>
+        <h2>welcome to Expense Tracker</h2>
         <div className={navcss.profilemsg}>
-          <h2>
-            your profile is incomplete <Link to="/profile">complete now</Link>
-          </h2>
+          <p>
+            your profile is incomplete <p ><Link to="/profile" className={navcss.link}> complete now</Link></p>
+          </p>
         </div>
       </div>
+      <hr></hr>
       <div className={navcss.formcontrol}>
         <ExpenseForm></ExpenseForm>
         <div className={navcss.navigation}>
           <button onClick={verifyEmailHandler}>verify email</button>
 
           <button onClick={ThemeHandler}>
-            {theme ? "Light Theme" : "Dark Theme"}
+            {themelight ? "Dark Theme" : "Light Theme"}
           </button>
           <LogOutButton></LogOutButton>
         </div>

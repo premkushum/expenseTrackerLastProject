@@ -8,17 +8,24 @@ import Expensegraph from "./Expensegraph";
 const ExpensePrint = () => {
   const expenseCtx = useContext(ExpenseContext);
   const [filterarray, setFilterArray] = useState(expenseCtx.expenseItem);
- 
+  const [times, settime] = useState("All time");
+
   useEffect(() => {
     // Update filterarray whenever expenseCtx.expenseItem changes
     setFilterArray(expenseCtx.expenseItem);
-  }, [expenseCtx.expenseItem])
+  }, [expenseCtx.expenseItem]);
   const sortref = useRef();
 
   let filterExpenses = expenseCtx.expenseItem;
 
   const sorteditemhandler = () => {
     const sortvalue = sortref.current.value;
+    if (sortvalue) {
+      settime(sortvalue);
+    } else {
+      settime("All time");
+    }
+
     if (sortvalue) {
       filterExpenses = expenseCtx.expenseItem.filter((item) => {
         console.log(item.date);
@@ -60,18 +67,43 @@ const ExpensePrint = () => {
     link.click();
   };
 
+  const premiumhandler = () => {
+    let premium;
+    if (premium > 10000) {
+      <p>premium activated</p>;
+    } else {
+      ("not activated");
+    }
+  };
+
   return (
     <Fragment>
       <div className={navcss.buttons}>
-        {total > 10000 ? <button>Activate premium</button> : ""}
-        <button onClick={handleDownload}>Download</button>
-        <input type="date" ref={sortref}></input>
-        <button onClick={sorteditemhandler}>graph viewer</button>
+        <div className={navcss.btncategory1}>
+          <button onClick={premiumhandler}>Activate premium</button>
+          <button onClick={handleDownload}>Download</button>
+        </div>
+        <div className={navcss.btncategory2}>
+          <input type="date" ref={sortref}></input>
+          <button onClick={sorteditemhandler}>Sort & Graph Data Viewer</button>
+        </div>
       </div>
       <div className={navcss.wrapper}>
-        <div className={navcss.container}>{newArray}</div>
+        <div className={navcss.container}>
+          {newArray.length > 0 ? (
+            newArray
+          ) : (
+            <div>
+              <h1>No expense found</h1>
+              <h3>try to add new expense for this date </h3>
+            </div>
+          )}
+        </div>
         <div className={navcss.graphcategory}>
           <h2>graph representer</h2>
+          <div>
+            <h4>showing you graph data for : {times}</h4>
+          </div>
 
           <div className={navcss.graph}>
             <Expensegraph items={filterarray}></Expensegraph>

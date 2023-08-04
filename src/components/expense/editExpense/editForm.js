@@ -6,6 +6,7 @@ const EditForm = (props) => {
   const nameRef = useRef();
   const AmountRef = useRef();
   const categoryRef = useRef();
+  const dateRef = useRef();
   const propsItem = props.items;
 
   const editDataHandler = (event) => {
@@ -63,6 +64,7 @@ const EditForm = (props) => {
         <option>petrol</option>
         <option>coffee</option>
       </select>
+      <input type="date" ref={dateRef}></input>
       <button>Submit</button>
     </form>
   );

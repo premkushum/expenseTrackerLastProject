@@ -25,16 +25,16 @@ const ExpenseForm = () => {
     <div className={navcss.container}>
       <form  className={navcss.form}>
         <input
-          placeholder="description"
+          placeholder="Item Name"
           type="text"
           ref={nameRef}
-          required
+          
         ></input>
         <input
           placeholder="Amount"
           type="number"
           ref={AmountRef}
-          required
+          
         ></input>
         <select ref={categoryRef}>
           <option>food</option>
@@ -43,7 +43,7 @@ const ExpenseForm = () => {
         </select>
         <input type="date" ref={dateRef}></input>
       </form>{" "}
-      <button onClick={formDataHandler}>Save expense</button>
+      <button onClick={formDataHandler}>Save Expense</button>
     </div>
   );
 };
