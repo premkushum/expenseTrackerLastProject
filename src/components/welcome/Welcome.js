@@ -40,19 +40,23 @@ const Welcome = () => {
   };
 
   const ThemeHandler = () => {
-    
     settheme(!themelight);
   };
-  // const lightThemeHandler = () => {
-  //   dispatch(themeActions.light());
-  // };
+
   return (
-    <div className={themelight?navcss.container:navcss.containerblack}>
-      <div className={navcss.welcomepage}>
-        <h2>welcome to Expense Tracker</h2>
+    <div className={themelight ? navcss.container : navcss.containerblack}>
+      <div className={navcss.welcome}>
+        <div className={navcss.welcomemsg}>
+          <h2>welcome to Expense Tracker</h2>
+        </div>
+
         <div className={navcss.profilemsg}>
           <p>
-            your profile is incomplete <p ><Link to="/profile" className={navcss.link}> complete now</Link></p>
+            your profile is incomplete{" "}
+            <Link to="/profile" className={navcss.link}>
+              {" "}
+              complete now
+            </Link>
           </p>
         </div>
       </div>
@@ -69,8 +73,6 @@ const Welcome = () => {
         </div>
       </div>
       <hr></hr>
-
-      
 
       <ExpensePrint></ExpensePrint>
     </div>

@@ -1,40 +1,44 @@
 .container {
   height: 100%;
-  background-color:rgb(169, 169, 55)
-}
-.containerblack{
-height:99vh;
-background-color: black;
-}
-.welcomepage {
+  background-color: rgb(169, 169, 55);
   display: flex;
-  
+  flex-direction: column;
+}
+.containerblack {
+  height: 100%;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+}
+.welcome{
+  display: flex;
+
   justify-content: space-between;
   color: rgb(215, 59, 59);
-
 }
 .profilemsg {
-  display: flex;
+  /* display: flex; */
   margin-right: 20px;
   justify-content: center;
   /* align-items: center; */
 }
-.welcomepage>h2{
+.welcomemsg > h2 {
   background-color: white;
   border-radius: 10px;
-  margin:5px;
-  display:flex;
+  margin: 5px;
+  display: flex;
   align-items: center;
-  padding:2px
+  padding: 2px;
 }
-.profilemsg>p{
+.profilemsg > p {
   background-color: white;
   border-radius: 25px;
-  width:300px;
+
   display: flex;
   justify-content: center;
   align-items: center;
   margin-right: 3px;
+  padding:3px
 }
 .formcontrol {
   display: flex;
@@ -42,10 +46,8 @@ background-color: black;
   align-items: center;
 }
 .navigation {
- 
   display: flex;
   flex-direction: column;
-
 }
 .navigation > button {
   background-color: chocolate;
@@ -54,15 +56,23 @@ background-color: black;
   padding: 10px;
   font-weight: bold;
 }
-.link{
+.link {
   margin-left: 5px;
-  text-decoration: none;
-  font-size:large
+  /* text-decoration: none; */
+  font-size: large;
 }
 @media (max-width: 900px) {
-  .welcomepage {
+  .welcome{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+}
+@media (max-width: 525px) {
+  .navigation > button {
+    
+    margin: 10px 5px 10px 5px;
+    padding: 5px;
+    
   }
 }

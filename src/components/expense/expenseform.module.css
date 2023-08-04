@@ -29,6 +29,7 @@
 }
 @media (max-width: 525px) {
   .container {
-    height: 250px;
+    height: auto;
+    width: auto;
   }
 }

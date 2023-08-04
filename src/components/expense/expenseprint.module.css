@@ -75,7 +75,7 @@ justify-content: space-between;
   justify-content: center;
 }
 .btncategory1>button,.btncategory2>button{
-  width:100px;
+  width:80px;
   height:40px;
   margin: 5px;
   background-color: chocolate;

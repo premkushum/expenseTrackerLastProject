@@ -85,7 +85,7 @@ const ExpensePrint = () => {
         </div>
         <div className={navcss.btncategory2}>
           <input type="date" ref={sortref}></input>
-          <button onClick={sorteditemhandler}>Sort & Graph Data Viewer</button>
+          <button onClick={sorteditemhandler}>Sort data</button>
         </div>
       </div>
       <div className={navcss.wrapper}>
