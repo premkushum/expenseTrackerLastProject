@@ -72,7 +72,7 @@ const ExpensePrint = () => {
     if (premium > 10000) {
       <p>premium activated</p>;
     } else {
-      ("not activated");
+      <p>not activated</p>
     }
   };
 
