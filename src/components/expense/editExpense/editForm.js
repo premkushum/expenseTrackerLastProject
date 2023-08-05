@@ -9,7 +9,10 @@ const EditForm = (props) => {
   const categoryRef = useRef();
   const dateRef = useRef();
   const propsItem = props.items;
-  const testing=localStorage.getItem("email").replace("@","").replace(".","")
+  let testing = "";
+  if (localStorage.getItem("email")) {
+    testing = localStorage.getItem("email").replace("@", "").replace(".", "");
+  }
 
   const editDataHandler = (event) => {
     event.preventDefault();

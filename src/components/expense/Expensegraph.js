@@ -6,8 +6,7 @@ const Expensegraph = (props) => {
   let petrolprice = 0;
   let foodprice = 0;
   let coffeeprice = 0;
-  console.log("graph executed");
-  console.log(filterExpenses);
+
 
   const newarray = filterExpenses.map((item) => {
     if (item.category === "food") {

@@ -3,7 +3,11 @@ import ExpenseContext from "./ExpenseContext";
 import { toast } from "react-toastify";
 
 const ExpenseContextProvider = (props) => {
-  const testing=localStorage.getItem("email").replace("@","").replace(".","")
+  let testing = "";
+  if (localStorage.getItem("email")) {
+    testing = localStorage.getItem("email").replace("@", "").replace(".", "");
+  }
+
   const [expense, setExpense] = useState([]);
   useEffect(() => {
     fetch(
@@ -89,9 +93,9 @@ const ExpenseContextProvider = (props) => {
         });
       })
       .catch((err) => {
-       toast.error(err.message,{
-        autoClose:2000
-       })
+        toast.error(err.message, {
+          autoClose: 2000,
+        });
       });
   };
   const deleteExpenseHandler = (newExpenseData, token) => {
@@ -105,21 +109,19 @@ const ExpenseContextProvider = (props) => {
         if (response.ok) {
           return response.json();
         } else {
-          throw new Error(
-            "expense data did not deleted......try again"
-          );
+          throw new Error("expense data did not deleted......try again");
         }
       })
       .then((res) => {
         setExpense(newExpenseData);
-        toast.success("expense Deleted successfully",{
-          autoClose:2000
-        })
+        toast.success("expense Deleted successfully", {
+          autoClose: 2000,
+        });
       })
       .catch((err) => {
-        toast.error(err.message,{
-          autoClose:2000
-        })
+        toast.error(err.message, {
+          autoClose: 2000,
+        });
       });
   };
   const editExpenseHandler = (editedExpenseData) => {
@@ -134,9 +136,9 @@ const ExpenseContextProvider = (props) => {
 
     updatedItems[existingIndex] = updatedItem;
     setExpense(updatedItems);
-    toast("expense successfully edited",{
-      autoClose:2000
-    })
+    toast("expense successfully edited", {
+      autoClose: 2000,
+    });
   };
 
   const ExpenseContextHelper = {

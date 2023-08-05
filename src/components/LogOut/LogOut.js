@@ -10,6 +10,7 @@ const LogOutButton = () => {
   
   const logOutHandler = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("email")
     dispatch(authAction.logout());
     toast("Logout Successfully")
     
