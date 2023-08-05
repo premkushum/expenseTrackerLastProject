@@ -3,10 +3,8 @@ import ExpenseContext from "./ExpenseContext";
 import { toast } from "react-toastify";
 
 const ExpenseContextProvider = (props) => {
-  let testing = "";
-  if (localStorage.getItem("email")) {
-    testing = localStorage.getItem("email").replace("@", "").replace(".", "");
-  }
+  const initialEmail = localStorage.getItem("email");
+  const[testing,setTesting]=useState(initialEmail ? initialEmail.replace("@", "").replace(".", "") : "")
 
   const [expense, setExpense] = useState([]);
   useEffect(() => {
@@ -20,7 +18,8 @@ const ExpenseContextProvider = (props) => {
       .then((response) => {
         if (response.ok) {
           return response.json();
-        } else {
+        }
+         else {
           throw new Error("data didnt save in server");
         }
       })
@@ -46,7 +45,7 @@ const ExpenseContextProvider = (props) => {
       .catch((err) => {
         toast.error(err.message);
       });
-  }, []);
+  }, [testing]);
 
   console.log(expense);
 
