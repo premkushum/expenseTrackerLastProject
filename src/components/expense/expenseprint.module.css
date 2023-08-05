@@ -1,6 +1,6 @@
-.wrapper{
-    display: flex;
-    /* margin-right:5px; */
+.wrapper {
+  display: flex;
+  /* margin-right:5px; */
 }
 
 .container {
@@ -9,11 +9,12 @@
   height: 60vh;
   flex-direction: column;
   width: 100%;
-   background-color: aliceblue;
-   box-shadow: 5px 8px 11px black;
-   margin-top:5px;
-   overflow-y: auto;
-   /* font-family: Arial, Helvetica, sans-serif; */
+  background-color: aliceblue;
+  box-shadow: 5px 8px 11px black;
+  margin-top: 5px;
+  overflow-y: auto;
+  /* font-family: Arial, Helvetica, sans-serif;
+    */
 }
 .category {
   display: flex;
@@ -24,8 +25,6 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  
- 
 }
 .itemname {
   width: 200px;
@@ -50,15 +49,15 @@
   overflow: hidden;
   white-space: nowrap;
 }
-.date{
+.date {
   display: flex;
   justify-content: center;
   position: absolute;
-  width:100px;
-  left:20px;
+  width: 100px;
+  left: 20px;
   background-color: dodgerblue;
-  color:whitesmoke;
-  font-family: arial
+  color: whitesmoke;
+  font-family: arial;
 }
 .categorybtn {
   display: flex;
@@ -77,27 +76,27 @@
   margin-top: 5px;
   margin-left: 5px;
 }
-.buttons{
-display:flex;
-justify-content: space-between;
+.buttons {
+  display: flex;
+  justify-content: space-between;
 }
-.btncategory1{
-  display:flex;
+.btncategory1 {
+  display: flex;
   justify-content: center;
 }
-.btncategory1>button,.btncategory2>button{
-  width:80px;
-  height:40px;
+.btncategory1 > button,
+.btncategory2 > button {
+  width: 80px;
+  height: 40px;
   margin: 5px;
   background-color: chocolate;
-  color:white;
+  color: white;
   font-weight: 700;
 }
 
+.border {
+  width: 100%;
 
-.border{
-  width:100%;
-  
   border: 1px solid dimgray;
 }
 
@@ -105,13 +104,12 @@ justify-content: space-between;
   .wrapper {
     flex-direction: column;
   }
-  .graphcategory{
-    width:100%;
+  .graphcategory {
+    width: 100%;
     height: 100%;
-    margin-left:0
+    margin-left: 0;
   }
-  .container{
+  .container {
     height: 35vh;
   }
-  
 }

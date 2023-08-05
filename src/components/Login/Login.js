@@ -51,6 +51,7 @@ const Login = () => {
       .then((res) => {
         localStorage.setItem("token", res.idToken);
         dispatch(authAction.login());
+        localStorage.setItem("email",emailRef.current.value)
         toast.success("login successful",{
           autoClose:2000
         })

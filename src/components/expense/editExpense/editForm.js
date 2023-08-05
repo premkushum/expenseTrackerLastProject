@@ -9,6 +9,7 @@ const EditForm = (props) => {
   const categoryRef = useRef();
   const dateRef = useRef();
   const propsItem = props.items;
+  const testing=localStorage.getItem("email").replace("@","").replace(".","")
 
   const editDataHandler = (event) => {
     event.preventDefault();
@@ -21,7 +22,7 @@ const EditForm = (props) => {
       date: dateRef.current.value,
     };
     fetch(
-      `https://expensetrackerdemo-4954a-default-rtdb.firebaseio.com/testing/${propsItem.token}.json`,
+      `https://expensetrackerdemo-4954a-default-rtdb.firebaseio.com/${testing}/${propsItem.token}.json`,
       {
         method: "PUT",
         body: JSON.stringify(myobj),

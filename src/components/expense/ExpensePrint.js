@@ -86,7 +86,7 @@ const ExpensePrint = () => {
           <button onClick={sorteditemhandler}>Sort data</button>
         </div>
       </div>
-      <div className={navcss.border}></div>
+      
       <div className={navcss.wrapper}>
         <div className={navcss.container}>
           {newArray.length > 0 ? (

@@ -10,20 +10,19 @@
   display: flex;
   flex-direction: column;
 }
-.welcome{
+.welcome {
   display: flex;
-  justify-content:space-between;
+  justify-content: space-between;
   background-color: crimson;
 }
-.title{
+.title {
   color: antiquewhite;
-  
 }
-.profilemsg>p{
-background-color: antiquewhite;
-border-radius: 15px;
-padding: 5px;
-color: brown;
+.profilemsg > p {
+  background-color: antiquewhite;
+  border-radius: 15px;
+  padding: 5px;
+  color: brown;
 }
 
 .formcontrol {
@@ -45,16 +44,16 @@ color: brown;
 }
 .link {
   margin-left: 5px;
-  /* text-decoration: none; */
+ 
   font-size: large;
 }
-.border{
-  width:100%;
-  
+.border {
+  width: 100%;
+
   border: 1px solid dimgray;
 }
 @media (max-width: 900px) {
-  .welcome{
+  .welcome {
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -62,9 +61,7 @@ color: brown;
 }
 @media (max-width: 525px) {
   .navigation > button {
-    
     margin: 10px 5px 10px 5px;
     padding: 5px;
-    
   }
 }

@@ -3,10 +3,11 @@ import ExpenseContext from "./ExpenseContext";
 import { toast } from "react-toastify";
 
 const ExpenseContextProvider = (props) => {
+  const testing=localStorage.getItem("email").replace("@","").replace(".","")
   const [expense, setExpense] = useState([]);
   useEffect(() => {
     fetch(
-      "https://expensetrackerdemo-4954a-default-rtdb.firebaseio.com/testing.json",
+      `https://expensetrackerdemo-4954a-default-rtdb.firebaseio.com/${testing}.json`,
       {
         method: "GET",
         headers: { "Content-Type": "application/json" },
@@ -47,7 +48,7 @@ const ExpenseContextProvider = (props) => {
 
   const expenseHandler = (expenseData) => {
     fetch(
-      "https://expensetrackerdemo-4954a-default-rtdb.firebaseio.com/testing.json",
+      `https://expensetrackerdemo-4954a-default-rtdb.firebaseio.com/${testing}.json`,
       {
         method: "POST",
         body: JSON.stringify(expenseData),
@@ -64,7 +65,7 @@ const ExpenseContextProvider = (props) => {
       .then((res) => {
         setExpense((prevstate) => {
           fetch(
-            ` https://expensetrackerdemo-4954a-default-rtdb.firebaseio.com/testing/${res.name}.json`,
+            ` https://expensetrackerdemo-4954a-default-rtdb.firebaseio.com/${testing}/${res.name}.json`,
             {
               method: "PUT",
               body: JSON.stringify({ ...expenseData, token: res.name }),
@@ -95,7 +96,7 @@ const ExpenseContextProvider = (props) => {
   };
   const deleteExpenseHandler = (newExpenseData, token) => {
     fetch(
-      `https://expensetrackerdemo-4954a-default-rtdb.firebaseio.com/testing/${token}.json`,
+      `https://expensetrackerdemo-4954a-default-rtdb.firebaseio.com/${testing}/${token}.json`,
       {
         method: "DELETE",
       }
