@@ -1,148 +1,168 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useReducer, useState } from "react";
 import ExpenseContext from "./ExpenseContext";
 import { toast } from "react-toastify";
 
-const ExpenseContextProvider = (props) => {
-  const initialEmail = localStorage.getItem("email");
-  const[testing,setTesting]=useState(initialEmail ? initialEmail.replace("@", "").replace(".", "") : "")
+const expenses=[];
 
-  const [expense, setExpense] = useState([]);
-  useEffect(() => {
-    fetch(
-      `https://expensetrackerdemo-4954a-default-rtdb.firebaseio.com/${testing}.json`,
-      {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      }
-    )
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-         else {
-          throw new Error("data didnt save in server");
-        }
-      })
+const Reducerfn=(state,action)=>{
+if(action.type=="ADD"){
 
-      .then((res) => {
-        if (res) {
-          const newItems = Object.values(res).map((item) => {
-            //we are converting to array
-            return {
-              id: item.id,
-              name: item.name,
-              amount: item.amount,
-              category: item.category,
-              token: item.token,
-              date: item.date,
-            };
-          });
-          setExpense(newItems);
-        } else {
-          setExpense([]);
-        }
-      })
-      .catch((err) => {
-        toast.error(err.message);
-      });
-  }, [testing]);
+  if (!state) {
+    return [action.expenseData];
+  }
+  const existitem = state.find((item) => {
+    console.log(item.token,action.expenseData.token,item.token === action.expenseData.token)
+    return item.token === action.expenseData.token;
+  });
+  console.log(existitem);
+  if (!existitem) {
+   
+    console.log("executed");
+   
+      console.log(state)
+      return [...state, action.expenseData];
+    
+  }
+}
 
-  console.log(expense);
+if(action.type=="DEL"){
 
-  const expenseHandler = (expenseData) => {
-    fetch(
-      `https://expensetrackerdemo-4954a-default-rtdb.firebaseio.com/${testing}.json`,
-      {
-        method: "POST",
-        body: JSON.stringify(expenseData),
-        headers: { "Content-Type": "application/json" },
-      }
-    )
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("data didnt saved in server");
-        }
-      })
-      .then((res) => {
-        setExpense((prevstate) => {
-          fetch(
-            ` https://expensetrackerdemo-4954a-default-rtdb.firebaseio.com/${testing}/${res.name}.json`,
-            {
-              method: "PUT",
-              body: JSON.stringify({ ...expenseData, token: res.name }),
-              headers: { "Content-Type": "application/json" },
-            }
-          )
-            .then((response) => {
-              if (response.ok) {
-                return response.json();
-              } else {
-                throw new Error("Expense didn`t saved in server");
-              }
-            })
-            .then((res) => {
-              toast("Expense added in Expense list Successfully", {
-                autoClose: 2000,
-              });
-            });
+  const itemAfterDeletion = state.filter((item) => {
+    return item.token !== action.token;
+  });
+  return itemAfterDeletion
+  // fetch(
+  //     `https://expensetrackerdemo-4954a-default-rtdb.firebaseio.com/${testing}/${action.token}.json`,
+  //     {
+  //       method: "DELETE",
+  //     }
+  //   )
+  //     .then((response) => {
+  //       if (response.ok) {
+  //         return response.json();
+  //       } else {
+  //         throw new Error("expense data did not deleted......try again");
+  //       }
+  //     })
+  //     .then((res) => {
+  //       const itemAfterDeletion = state.filter((item) => {
+  //         return item.token !== action.token;
+  //       });
+  //       console.log(itemAfterDeletion);
+      
+  //       toast.success("expense Deleted successfully", {
+  //         autoClose: 2000,
+  //       });
 
-          return [...prevstate, { ...expenseData, token: res.name }];
-        });
-      })
-      .catch((err) => {
-        toast.error(err.message, {
-          autoClose: 2000,
-        });
-      });
-  };
-  const deleteExpenseHandler = (newExpenseData, token) => {
-    fetch(
-      `https://expensetrackerdemo-4954a-default-rtdb.firebaseio.com/${testing}/${token}.json`,
-      {
-        method: "DELETE",
-      }
-    )
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("expense data did not deleted......try again");
-        }
-      })
-      .then((res) => {
-        setExpense(newExpenseData);
-        toast.success("expense Deleted successfully", {
-          autoClose: 2000,
-        });
-      })
-      .catch((err) => {
-        toast.error(err.message, {
-          autoClose: 2000,
-        });
-      });
-  };
-  const editExpenseHandler = (editedExpenseData) => {
-    const existingIndex = expense.findIndex((item) => {
-      return item.token === editedExpenseData.token;
+  //       return itemAfterDeletion
+  //     })
+  //     .catch((err) => {
+  //       toast.error(err.message, {
+  //         autoClose: 2000,
+  //       });
+  //     });
+}
+
+if(action.type=="Edit"){
+    const existingIndex =state.findIndex((item) => {
+      return item.token === action.editData.token
     });
-    const existingItem = expense[existingIndex];
+    // const existingItem = expenses[existingIndex];
 
-    const updatedItem = { ...editedExpenseData };
+    const updatedItem = { ...action.editData };
 
-    const updatedItems = [...expense];
+    const updatedItems = [...state];
 
     updatedItems[existingIndex] = updatedItem;
-    setExpense(updatedItems);
+    // setExpense(updatedItems);
     toast("expense successfully edited", {
       autoClose: 2000,
     });
+    return updatedItems
+}
+return state
+}
+
+const ExpenseContextProvider = (props) => {
+  // const [expenses, setExpense] = useState([]);
+
+const [state,dispatchFn]=useReducer(Reducerfn,expenses)
+
+  const expenseHandler = (expenseData) => {
+    // console.log(expenseData);
+    // console.log(expenses)
+
+    dispatchFn({type:"ADD",expenseData:expenseData})
+
+    // const existitem = expenses.find((item) => {
+    //   console.log(item)
+    //   return item.id === expenseData.token;
+    // });
+    // console.log(existitem);
+    // if (existitem == undefined) {
+    //   console.log(expenses);
+    //   console.log("executed");
+    //   setExpense((prev) => {
+    //     return [...prev, expenseData];
+    //   });
+    // }
+  };
+  const deleteExpenseHandler = (token) => {
+
+    dispatchFn({type:"DEL",token:token})
+ 
+  //   fetch(
+  //     `https://expensetrackerdemo-4954a-default-rtdb.firebaseio.com/${testing}/${token}.json`,
+  //     {
+  //       method: "DELETE",
+  //     }
+  //   )
+  //     .then((response) => {
+  //       if (response.ok) {
+  //         return response.json();
+  //       } else {
+  //         throw new Error("expense data did not deleted......try again");
+  //       }
+  //     })
+  //     .then((res) => {
+  //       const itemAfterDeletion = expense.filter((item) => {
+  //         return item.token !== token;
+  //       });
+  //       console.log(itemAfterDeletion);
+  //       setExpense(itemAfterDeletion);
+  //       toast.success("expense Deleted successfully", {
+  //         autoClose: 2000,
+  //       });
+  //     })
+  //     .catch((err) => {
+  //       toast.error(err.message, {
+  //         autoClose: 2000,
+  //       });
+  //     });
+  };
+  const editExpenseHandler = (editedExpenseData) => {
+
+    dispatchFn({type:"Edit",editData:editedExpenseData})
+  //   const existingIndex = expense.findIndex((item) => {
+  //     return item.token === editedExpenseData.token;
+  //   });
+  //   const existingItem = expenses[existingIndex];
+
+  //   const updatedItem = { ...editedExpenseData };
+
+  //   const updatedItems = [...expenses];
+
+  //   updatedItems[existingIndex] = updatedItem;
+  //   setExpense(updatedItems);
+  //   toast("expense successfully edited", {
+  //     autoClose: 2000,
+  //   });
   };
 
+  console.log(state)
   const ExpenseContextHelper = {
     addExpense: expenseHandler,
-    expenseItem: expense,
+    expenseItem: state,
     deleteExpense: deleteExpenseHandler,
     editExpense: editExpenseHandler,
   };

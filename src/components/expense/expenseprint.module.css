@@ -36,7 +36,7 @@
 }
 .amount {
   width: 100px;
-  /* background-color: chocolate; */
+
   margin-left: 5px;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -49,12 +49,14 @@
   overflow: hidden;
   white-space: nowrap;
 }
+
 .date {
   display: flex;
   justify-content: center;
-  position: absolute;
-  width: 100px;
-  left: 20px;
+  position:sticky;
+  min-width: 100px;
+  height:20px;
+  /* left: 20px;  */
   background-color: dodgerblue;
   color: whitesmoke;
   font-family: arial;
@@ -111,5 +113,8 @@
   }
   .container {
     height: 35vh;
+  }
+  .date{
+  font-size: .8rem;
   }
 }

@@ -17,7 +17,6 @@ const EditForm = (props) => {
   const editDataHandler = (event) => {
     event.preventDefault();
     const myobj = {
-      id: propsItem.id,
       token: propsItem.token,
       name: nameRef.current.value,
       category: categoryRef.current.value,

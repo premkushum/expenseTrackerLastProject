@@ -8,9 +8,10 @@ import ActivateExpense from "./ActivateExpense";
 
 const ExpensePrint = () => {
   const expenseCtx = useContext(ExpenseContext);
+  console.log(expenseCtx.expenseItem);
   const [filterarray, setFilterArray] = useState(expenseCtx.expenseItem);
   const [times, settime] = useState("All time");
-  const [premium,setPremium]=useState(false);
+  const [premium, setPremium] = useState(false);
 
   useEffect(() => {
     // Update filterarray whenever expenseCtx.expenseItem changes
@@ -42,11 +43,13 @@ const ExpensePrint = () => {
   let total = 0;
   const newArray = filterarray.map((item) => {
     total = item.amount + total;
+    console.log(item);
     return (
-      <div key={item.id}>
-        <div className={navcss.category}>
+      <div key={item.token}>
+        <div className={navcss.category}><span className={navcss.date}>{item.date}</span>
           <div className={navcss.item}>
-            <span className={navcss.date}>{item.date}</span>
+            
+            
             <h3 className={navcss.itemname}>{item.name}</h3>
             <h3 className={navcss.amount}>{item.amount}</h3>
             <h3 className={navcss.categoryname}>{item.category}</h3>
@@ -86,7 +89,7 @@ const ExpensePrint = () => {
           <button onClick={sorteditemhandler}>Sort data</button>
         </div>
       </div>
-      
+
       <div className={navcss.wrapper}>
         <div className={navcss.container}>
           {newArray.length > 0 ? (
@@ -100,7 +103,7 @@ const ExpensePrint = () => {
         </div>
         <div className={navcss.graphcategory}>
           <h2>Graph Representer</h2>
-       
+
           <div>
             <h4>showing you graph data for : {times}</h4>
           </div>
@@ -110,7 +113,11 @@ const ExpensePrint = () => {
           </div>
         </div>
       </div>
-     {premium?<ActivateExpense close={premiumhandler} ></ActivateExpense>:""} 
+      {premium ? (
+        <ActivateExpense close={premiumhandler}></ActivateExpense>
+      ) : (
+        ""
+      )}
     </Fragment>
   );
 };
